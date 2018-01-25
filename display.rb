@@ -1,0 +1,1 @@
+puts "display.rb initialized"
