@@ -4,7 +4,7 @@ class BoardCase
   def initialize(cellnum, width)
     @col = cellnum % width
     @line = cellnum / width + 1  
-    @value = 0
+    @value = '.'
   end
 
 end

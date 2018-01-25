@@ -1,7 +1,6 @@
 require "pry"
 require_relative "player.rb"
 require_relative "board.rb"
-require_relative "display.rb"
 
 class Game
 attr_accessor :number_of_players, :player_names_array
@@ -61,24 +60,16 @@ attr_accessor :number_of_players, :player_names_array
       print "count them from left to right and from top to bottom)"
       @coor = gets.chomp.to_i      
       @board.setcell(@coor, eval("@p#{@pnumber}.symbol"))
-      if @board.access(@coor) == @board.access(@coor-1) && @board.access(@coor) == @board.access(@coor+1)
-        @finish = 1
-      end
-      if @board.access(@coor) == @board.access(@coor - @width) && @board.access(@coor) == @board.access(@coor + @width)
-        @finish = 1
-      end
-      if @board.access(@coor) == @board.access(@coor - @width + 1) && @board.access(@coor) == @board.access(@coor + @width - 1)
-        @finish = 1
-      end
-      if @board.access(@coor) == @board.access(@coor - @width - 1) && @board.access(@coor) == @board.access(@coor + @width + 1)
-        @finish = 1
-      end
+      @abs_ord = [] #line, column
+      @abs_ord[1] = @coor % @width
+      @abs_ord[0] = @coor / @width + 1
       puts "\n#{@player_names_turn}(#{eval("@p#{@pnumber}.symbol")}) played on cell#{@coor}."
       @turns += 1
       for @z in 1..(@cellmax)
         @board.display_value(@z)
         print "\n" if @z % @width == 0
       end
+      if @board.access(@abs_ord[0], @abs_ord[1], @coor)
       @t += 1
     end
 

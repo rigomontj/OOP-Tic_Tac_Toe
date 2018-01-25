@@ -9,13 +9,12 @@ class Board
     @height = height
     for i in 1..(width*height)
       instance_variable_set("@c#{i}", BoardCase.new(i, width))
-    end
+   end
   
   end
 
-  def access(coord)
-    #binding.pry
-    return (eval("@c#{coord}.value"))
+  def access(l, c, fullcoords)
+    
   end
   
   def setcell(coor, val)
